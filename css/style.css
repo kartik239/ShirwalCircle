@@ -155,3 +155,32 @@ body.modal-open { overflow: hidden; }
 .service-modal[hidden] { display: none !important; }
 
 .logo-mini { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; margin-bottom: .7rem; border:1px solid rgba(255,232,160,.55); background: rgba(255,255,255,.18); padding: .2rem; }
+
+
+/* Lightweight premium motion */
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(8px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes softPulse {
+  0%,100% { box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -16px 30px rgba(255,255,255,.06); }
+  50% { box-shadow: var(--shadow-soft), 0 0 18px rgba(255,214,90,.16), inset 0 1px 0 rgba(255,255,255,.5), inset 0 -16px 30px rgba(255,255,255,.08); }
+}
+.hero-box { animation: floatIn .7s ease both; }
+.vendor-grid .glass-card, .categories .glass-card, .info-grid .glass-card {
+  animation: floatIn .55s ease both;
+}
+.vendor-grid .glass-card:nth-child(2n), .categories .glass-card:nth-child(2n) { animation-delay: .08s; }
+.vendor-grid .glass-card:nth-child(3n), .categories .glass-card:nth-child(3n) { animation-delay: .14s; }
+.site-header .glass-card { animation: softPulse 6s ease-in-out infinite; }
+.glass-btn { position: relative; overflow: hidden; }
+.glass-btn::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-110%);
+  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.34) 50%, transparent 80%);
+  transition: transform .6s ease;
+}
+.glass-btn:hover::after { transform: translateX(110%); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-box, .vendor-grid .glass-card, .categories .glass-card, .info-grid .glass-card, .site-header .glass-card { animation: none !important; }
+  .glass-btn::after { display:none; }
+}
