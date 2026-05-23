@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Services | Shirwal Circle</title><link rel="stylesheet" href="css/style.css"></head><body>
+<header class="site-header container"><nav class="navbar glass-card"><a class="brand" href="index.html">Shirwal Circle</a><div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="vendors.html">Services</a><a class="nav-link" href="cart.html">Cart</a><a class="nav-link" data-auth="logged-in" href="account.html">Account</a><a class="nav-link" data-auth="logged-out" href="login.html">Login</a><a class="nav-link" data-auth="logged-in" data-logout href="#">Logout</a></div></nav></header>
+
+<main class="container section">
+  <h1 class="section-title">All Local Services in Shirwal</h1>
+  <p class="muted">Tap any service to open a service card. Click contact to open WhatsApp with a preloaded message.</p>
+
+  <section class="section" id="health"><h2 class="section-title">Health & Wellness</h2><div class="grid vendor-grid">
+    <button class="glass-card card-pad service-btn" data-service="Doctor">Doctor</button>
+    <button class="glass-card card-pad service-btn" data-service="Beauty Parlor">Beauty Parlor</button>
+    <button class="glass-card card-pad service-btn" data-service="Salon">Salon</button>
+  </div></section>
+
+  <section class="section" id="home-services"><h2 class="section-title">Home Services</h2><div class="grid vendor-grid">
+    <button class="glass-card card-pad service-btn" data-service="Electrical Technician">Electrical Technician</button>
+    <button class="glass-card card-pad service-btn" data-service="Plumbing Work">Plumbing Work</button>
+    <button class="glass-card card-pad service-btn" data-service="Gas Mechanic">Gas Mechanic</button>
+    <button class="glass-card card-pad service-btn" data-service="Refrigerator Mechanic">Refrigerator Mechanic</button>
+    <button class="glass-card card-pad service-btn" data-service="TV/LED Mechanic">TV/LED Mechanic</button>
+    <button class="glass-card card-pad service-btn" data-service="Computer/Printer Technician">Computer/Printer Technician</button>
+    <button class="glass-card card-pad service-btn" data-service="Pest Control">Pest Control</button>
+    <button class="glass-card card-pad service-btn" data-service="Home Cleaning">Home Cleaning</button>
+    <button class="glass-card card-pad service-btn" data-service="House Shifting">House Shifting</button>
+    <button class="glass-card card-pad service-btn" data-service="Painting Works">Painting Works</button>
+    <button class="glass-card card-pad service-btn" data-service="Laundry">Laundry</button>
+    <button class="glass-card card-pad service-btn" data-service="Tiffin Services">Tiffin Services</button>
+  </div></section>
+
+  <section class="section" id="transport"><h2 class="section-title">Transport & Travel</h2><div class="grid vendor-grid">
+    <button class="glass-card card-pad service-btn" data-service="Rickshaw">Rickshaw</button>
+    <button class="glass-card card-pad service-btn" data-service="Tours and Travels">Tours and Travels</button>
+    <button class="glass-card card-pad service-btn" data-service="Car Services">Car Services</button>
+    <button class="glass-card card-pad service-btn" data-service="Car Wash">Car Wash</button>
+  </div></section>
+
+  <section class="glass-card card-pad service-popup" data-service-popup hidden>
+    <h2 data-popup-title>Select a service</h2>
+    <p class="muted" data-popup-copy>Service details will appear here.</p>
+    <div class="actions">
+      <a class="glass-btn" data-contact-link target="_blank" rel="noopener">Contact on WhatsApp</a>
+      <button class="glass-btn" data-close-popup type="button">Close</button>
+    </div>
+  </section>
+</main>
+<script src="js/app.js"></script>
+</body></html>
