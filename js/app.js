@@ -1,7 +1,28 @@
 /* Shirwal Circle interactions: auth, cart, checkout->WhatsApp */
 const KEY_CART = 'shirwal_circle_cart';
 const KEY_USER = 'shirwal_circle_user';
-const SAMPLE_USER = { username: 'demo@shirwalcircle.in', password: 'Shirwal@123', name: 'Rohan Patil', phone: '+91 98765 12345', address: 'Datta Nagar, Shirwal' };
+
+/*
+  ADMIN ACCOUNT MANAGEMENT
+  Edit this list manually to create login accounts.
+  Required fields per account:
+  username, password, name, phone, address
+*/
+const USER_ACCOUNTS = [
+  {
+    username: 'demo@shirwalcircle.in',
+    password: 'Shirwal@123',
+    name: 'Rohan Patil',
+    phone: '+91 98765 12345',
+    address: 'Datta Nagar, Shirwal'
+  }
+];
+
+function findAccount(username, password) {
+  return USER_ACCOUNTS.find(
+    (acc) => acc.username === username && acc.password === password
+  ) || null;
+}
 
 function getUser(){ try{return JSON.parse(localStorage.getItem(KEY_USER)||'null')}catch{return null} }
 function setUser(user){ localStorage.setItem(KEY_USER, JSON.stringify(user)); }
@@ -15,8 +36,6 @@ function updateAuthUI(){
   const user=getUser();
   document.querySelectorAll('[data-auth="logged-in"]').forEach(el=>el.style.display=user?'inline-flex':'none');
   document.querySelectorAll('[data-auth="logged-out"]').forEach(el=>el.style.display=user?'none':'inline-flex');
-  const badge=document.querySelector('[data-auth-badge]');
-  if(badge) badge.textContent=user?`Logged in: ${user.username}`:'Guest';
 }
 function bindLogout(){ document.querySelectorAll('[data-logout]').forEach(btn=>btn.addEventListener('click',(e)=>{e.preventDefault(); logout();})); }
 function requireAuth(){ if(document.body.dataset.requiresAuth==='true' && !getUser()) location.href='login.html'; }
@@ -43,8 +62,9 @@ function bindLogin(){
     e.preventDefault();
     const username=form.querySelector('[name="username"]').value.trim();
     const password=form.querySelector('[name="password"]').value.trim();
-    if(username!==SAMPLE_USER.username||password!==SAMPLE_USER.password){ help.textContent='Invalid credentials. Try sample login shown below.'; return; }
-    setUser({ username, name:SAMPLE_USER.name, phone:SAMPLE_USER.phone, address:SAMPLE_USER.address, loggedAt:new Date().toISOString() });
+    const account = findAccount(username, password);
+    if(!account){ help.textContent='Invalid credentials. Ask admin to add your account in js/app.js'; return; }
+    setUser({ username: account.username, name: account.name, phone: account.phone, address: account.address, loggedAt:new Date().toISOString() });
     location.href='account.html';
   });
 }
@@ -61,14 +81,12 @@ function bindCheckoutWhatsapp(){
   form.addEventListener('submit',e=>{e.preventDefault(); const phone=form.querySelector('[name="whatsapp"]').value.trim(); const address=form.querySelector('[name="address"]').value.trim(); const cart=readCart(); if(!phone||!address||!cart.length)return alert('Please add phone, address, and cart items.'); const lines=cart.map(i=>`- ${i.name} x${i.qty} = ₹${i.qty*i.price}`).join('%0A'); const total=cart.reduce((s,i)=>s+i.price*i.qty,0); const msg=`New Shirwal Circle Order%0AAddress: ${encodeURIComponent(address)}%0AItems:%0A${lines}%0ATotal: ₹${total}`; window.open(`https://wa.me/${phone}?text=${msg}`,'_blank'); });
 }
 
-
 function bindServicePopup(){
   const popup=document.querySelector('[data-service-popup]');
   if(!popup) return;
   const title=popup.querySelector('[data-popup-title]');
   const copy=popup.querySelector('[data-popup-copy]');
   const link=popup.querySelector('[data-contact-link]');
-  const close=popup.querySelector('[data-close-popup]');
   document.querySelectorAll('.vendor-detail-btn').forEach(btn=>btn.addEventListener('click',()=>{
     const service=btn.dataset.service;
     const text=`Hello, I need ${service} service in Shirwal. Please share availability and charges.`;
@@ -83,6 +101,6 @@ function bindServicePopup(){
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && !popup.hidden) hide(); });
 }
 
-function bindScrollTheme(){ const root=document.documentElement; window.addEventListener('scroll',()=>{ const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight||1),1); root.style.setProperty('--scrollGlow',(0.2+p*0.8).toFixed(2)); }); }
+function bindScrollTheme(){ const root=document.documentElement; window.addEventListener('scroll',()=>{ const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight||1),1); root.style.setProperty('--scrollGlow',(0.3+p*0.9).toFixed(2)); }); }
 
 document.addEventListener('DOMContentLoaded',()=>{ requireAuth(); updateCartCount(); updateAuthUI(); bindLogout(); bindAddButtons(); renderCartPage(); bindLogin(); renderAccountInfo(); bindCheckoutWhatsapp(); bindServicePopup(); bindScrollTheme(); });
