@@ -69,7 +69,7 @@ function bindServicePopup(){
   const copy=popup.querySelector('[data-popup-copy]');
   const link=popup.querySelector('[data-contact-link]');
   const close=popup.querySelector('[data-close-popup]');
-  document.querySelectorAll('.service-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.vendor-detail-btn').forEach(btn=>btn.addEventListener('click',()=>{
     const service=btn.dataset.service;
     const text=`Hello, I need ${service} service in Shirwal. Please share availability and charges.`;
     title.textContent=service;
