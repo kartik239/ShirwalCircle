@@ -4,16 +4,17 @@
    ========================================================= */
 
 :root {
-  --bg-1: #090b17;
-  --bg-2: #11162d;
-  --bg-3: #1d2451;
+  --bg-1: #050505;
+  --bg-2: #0f0f0f;
+  --bg-3: #1a1607;
   --text-primary: #f7f9ff;
   --text-secondary: #c8d0f5;
-  --accent: #73d0ff;
-  --accent-2: #9d7bff;
+  --accent: #ffd54a;
+  --accent-2: #ffef9a;
   --success: #41d39b;
   --warning: #ffbf5e;
   --danger: #ff6f91;
+  --scrollGlow: 0.2;
 
   --glass-bg: rgba(255, 255, 255, 0.13);
   --glass-bg-strong: rgba(255, 255, 255, 0.2);
@@ -42,10 +43,10 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
-  background: radial-gradient(circle at 15% 15%, #26336f 0%, transparent 36%),
-              radial-gradient(circle at 85% 5%, #42276f 0%, transparent 32%),
-              radial-gradient(circle at 50% 90%, #153f67 0%, transparent 30%),
-              linear-gradient(130deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  background: radial-gradient(circle at 15% 15%, rgba(255,208,64,var(--scrollGlow)) 0%, transparent 40%),
+              radial-gradient(circle at 85% 5%, rgba(255,242,168,calc(var(--scrollGlow)*.8)) 0%, transparent 35%),
+              radial-gradient(circle at 50% 90%, rgba(140,120,30,calc(var(--scrollGlow)*.7)) 0%, transparent 34%),
+              linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
   background-size: 180% 180%;
   animation: bgFlow 18s ease infinite;
 }
@@ -73,7 +74,7 @@ a { color: inherit; text-decoration: none; }
 .glass-btn {
   display: inline-flex; align-items: center; justify-content: center;
   gap: .5rem; cursor: pointer; border: 1px solid var(--glass-border);
-  background: linear-gradient(120deg, rgba(115,208,255,.38), rgba(157,123,255,.35));
+  background: linear-gradient(120deg, rgba(255,213,74,.45), rgba(255,239,154,.35));
   color: white; padding: .7rem 1.1rem; border-radius: 999px; font-weight: 600;
 }
 .glass-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }

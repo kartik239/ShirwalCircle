@@ -5,15 +5,18 @@
   <title>Login | Shirwal Circle</title><link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header class="site-header container"><nav class="navbar glass-card"><div class="brand">Shirwal Circle</div><div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="account.html">Account</a></div></nav></header>
+<header class="site-header container"><nav class="navbar glass-card"><div class="brand">Shirwal Circle</div><div class="nav-links"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="account.html">Account</a><span class="chip">Cart: <span data-cart-count>0</span></span></div></nav></header>
 <main class="container section">
   <section class="glass-card card-pad">
-    <h1 class="section-title">Login</h1>
+    <h1 class="section-title">Welcome Back</h1>
+    <p class="muted">Login to continue shopping across local Shirwal vendors.</p>
+    <div data-login-state></div>
     <form data-login-form>
-      <label>Email</label><input class="glass-input" type="email" name="email" required>
+      <label>Username</label><input class="glass-input" type="text" name="username" required>
       <label>Password</label><input class="glass-input" type="password" name="password" required>
-      <br><br><button class="glass-btn" type="submit">Login</button>
-      <a class="glass-btn" href="credentials.html">View Stored Credentials</a>
+      <p class="muted"><strong>Sample Login:</strong> demo@shirwalcircle.in / Shirwal@123</p>
+      <p class="muted" data-login-help></p>
+      <button class="glass-btn" type="submit">Login</button>
     </form>
   </section>
 </main>
