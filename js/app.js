@@ -81,6 +81,16 @@ function bindCheckoutWhatsapp(){
   form.addEventListener('submit',e=>{e.preventDefault(); const phone=form.querySelector('[name="whatsapp"]').value.trim(); const address=form.querySelector('[name="address"]').value.trim(); const cart=readCart(); if(!phone||!address||!cart.length)return alert('Please add phone, address, and cart items.'); const lines=cart.map(i=>`- ${i.name} x${i.qty} = ₹${i.qty*i.price}`).join('%0A'); const total=cart.reduce((s,i)=>s+i.price*i.qty,0); const msg=`New Shirwal Circle Order%0AAddress: ${encodeURIComponent(address)}%0AItems:%0A${lines}%0ATotal: ₹${total}`; window.open(`https://wa.me/${phone}?text=${msg}`,'_blank'); });
 }
 
+
+function showToast(msg){
+  const t=document.querySelector('[data-ui-toast]');
+  if(!t) return;
+  t.textContent=msg;
+  t.hidden=false;
+  clearTimeout(showToast._timer);
+  showToast._timer=setTimeout(()=>t.hidden=true,2200);
+}
+
 function bindServicePopup(){
   const popup=document.querySelector('[data-service-popup]');
   if(!popup) return;
@@ -95,6 +105,7 @@ function bindServicePopup(){
     link.href=`https://wa.me/917066644476?text=${encodeURIComponent(text)}`;
     popup.hidden=false;
     document.body.classList.add('modal-open');
+    showToast(`${service} details opened`);
   }));
   const hide=()=>{ popup.hidden=true; document.body.classList.remove('modal-open'); };
   popup.querySelectorAll('[data-close-popup]').forEach(el=>el.addEventListener('click', hide));

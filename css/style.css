@@ -184,3 +184,9 @@ body.modal-open { overflow: hidden; }
   .hero-box, .vendor-grid .glass-card, .categories .glass-card, .info-grid .glass-card, .site-header .glass-card { animation: none !important; }
   .glass-btn::after { display:none; }
 }
+
+.quick-nav { margin: .8rem 0 1.2rem; }
+.quick-nav .chip { background: rgba(255,230,140,.18); }
+.quick-nav .chip:hover { background: rgba(255,230,140,.3); }
+.toast { position: fixed; right: 1rem; bottom: 1rem; z-index: 180; padding: .7rem .95rem; border-radius: 12px; border:1px solid rgba(255,232,160,.55); background: rgba(20,17,8,.88); color: var(--text-primary); backdrop-filter: blur(8px); box-shadow: var(--shadow-soft); }
+.toast[hidden]{display:none;}
