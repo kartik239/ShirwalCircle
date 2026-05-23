@@ -76,9 +76,11 @@ function bindServicePopup(){
     copy.textContent=`You selected ${service}. Tap contact to continue on WhatsApp with preloaded request text.`;
     link.href=`https://wa.me/917066644476?text=${encodeURIComponent(text)}`;
     popup.hidden=false;
-    popup.scrollIntoView({behavior:'smooth', block:'center'});
+    document.body.classList.add('modal-open');
   }));
-  close?.addEventListener('click',()=>popup.hidden=true);
+  const hide=()=>{ popup.hidden=true; document.body.classList.remove('modal-open'); };
+  popup.querySelectorAll('[data-close-popup]').forEach(el=>el.addEventListener('click', hide));
+  document.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && !popup.hidden) hide(); });
 }
 
 function bindScrollTheme(){ const root=document.documentElement; window.addEventListener('scroll',()=>{ const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight||1),1); root.style.setProperty('--scrollGlow',(0.2+p*0.8).toFixed(2)); }); }
