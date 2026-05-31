@@ -115,3 +115,28 @@ function bindServicePopup(){
 function bindScrollTheme(){ const root=document.documentElement; window.addEventListener('scroll',()=>{ const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight||1),1); root.style.setProperty('--scrollGlow',(0.3+p*0.9).toFixed(2)); }); }
 
 document.addEventListener('DOMContentLoaded',()=>{ requireAuth(); updateCartCount(); updateAuthUI(); bindLogout(); bindAddButtons(); renderCartPage(); bindLogin(); renderAccountInfo(); bindCheckoutWhatsapp(); bindServicePopup(); bindScrollTheme(); });
+
+function openServiceFromQuery(openByName) {
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get('service');
+
+  if (!service) return;
+
+  const targetCard = [...document.querySelectorAll('[data-service-card]')]
+    .find((card) => card.dataset.serviceCard === service);
+
+  if (targetCard) {
+    targetCard.classList.add('service-card-highlight');
+
+    setTimeout(() => {
+      targetCard.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 250);
+  }
+
+  setTimeout(() => {
+    openByName(service);
+  }, 650);
+}
